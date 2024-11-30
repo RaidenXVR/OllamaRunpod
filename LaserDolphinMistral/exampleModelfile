@@ -1,0 +1,17 @@
+FROM ./LaserDolphinMistral2x7B.gguf
+
+PARAMETER temperature 0.8
+PARAMETER num_predict -1
+PARAMETER num_ctx 32000
+
+
+TEMPLATE """<|im_start|>system
+{{ .System }}<|im_end|>
+{{ end }}{{ if .Prompt }}<|im_start|>user
+{{ .Prompt }}<|im_end|>
+{{ end }}<|im_start|>assistant
+{{ .Response }}
+"""
+
+PARAMETER stop <|im_start|>
+PARAMETER stop <|im_end|>
